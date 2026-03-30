@@ -9,16 +9,15 @@
     <title>Atlantik</title>
 </head>
 <body>
-<nav class="navbar navbar-light bg-secondary">
+<nav class="navbar navbar-light bg-">
   <a class="navbar-brand" href="<?php echo site_url('accueil') ?>">
     <img src="../../../assets/images/Atlantik.jpg" width="35" height="35" class="d-inline-block align-top">
     Atlantik
     <?php
         $session = session();
-        if(!is_null($session->get('identifiant'))) : ?>
-        <?php echo 'Utilisateur connecté : ' . $session->get('identifiant').'&nbsp;&nbsp;'; ?>
+        if(!is_null($session->get('identifiant')) or !is_null($session->get('Identifiant'))) : ?>
         <a href="<?php echo site_url('sedeconnecter') ?>"><button class="btn btn-outline-danger" type="button">Se déconnecter</button></a>&nbsp;&nbsp;
-        <?php if ($session->get('profil') == 'SuperAdministrateur') : ?>
+        <?php if ($session->get('profil') == 'Administrateur') : ?>
             <a href="<?php echo site_url('ajouterproduit') ?>">Ajouter un produit</a>&nbsp;&nbsp;
             <a href="<?php echo site_url('voircommandesproduits') ?>">Voir commandes-produits</a>&nbsp;&nbsp;
             <?php endif;  ?>

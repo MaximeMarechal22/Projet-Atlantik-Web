@@ -8,3 +8,5 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('accueil', 'Visiteur::accueil');
 $routes->match(['get', 'post'], 'seconnecter', 'Visiteur::seConnecter');
+$routes->match(['get', 'post'], 'sedeconnecter', 'Visiteur::seDeconnecter');
+
