@@ -5,10 +5,10 @@ use CodeIgniter\Model;
 class ModeleClient extends Model
 {
     protected $table = 'client';
-    protected $primaryKey = 'noclient';
+    protected $primaryKey = 'NOCLIENT';
     protected $useAutoIncrement = true;
     protected $returnType = 'object';
  
-    protected $allowedFields = ['nom', 'prenom', 'adresse', 'codepostal', 'ville', 'telephonefixe', 'telephonemobile', 'mel', 'motdepasse'];
+    protected $allowedFields = ['NOM', 'PRENOM', 'ADRESSE', 'CODEPOSTAL', 'VILLE', 'TELEPHONEFIXE', 'TELEPHONEMOBILE', 'MEL', 'MOTDEPASSE'];
  
 }

@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Atlantik</title>
 </head>
 <body>
@@ -23,12 +26,13 @@
             <?php endif;  ?>
         
     <?php else : ?>
-        <a href="<?php echo site_url('seconnecter') ?>"><button class="btn btn-outline-success" type="button">Se connecter</button></a>&nbsp;&nbsp;
+        <a href="<?php echo site_url('seconnecter') ?>"><button class="btn btn-outline-success" type="button">Se connecter</button></a>
+        ou
+        <a href="<?php echo site_url('creeruncompte') ?>"><button class="btn btn-outline-success" type="button">Créer un compte</button></a>&nbsp;&nbsp;
     <?php endif; ?>
-    <a href="<?php echo site_url('voirlesproduits') ?>"><button class="btn btn-outline-dark" type="button">Voir tous les produits</button></a>&nbsp;&nbsp;
+    <a href="<?php echo site_url('voirlesliaisons') ?>"><button class="btn btn-outline-dark" type="button">Voir les liaisons par secteur</button></a>&nbsp;&nbsp;
     <a href="<?php echo site_url('voirlesproduitsavecpagination') ?>"><button class="btn btn-outline-dark" type="button">Lister les produits (par 3)</button></a>&nbsp;&nbsp;
   </a>
-  
 </nav>
 
   
