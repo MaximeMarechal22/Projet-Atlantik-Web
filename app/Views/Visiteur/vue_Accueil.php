@@ -1,44 +1,50 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <center>
-      <h1><b> Quelques-uns des ports que nous desservont </b></h1>
-      </center>
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
-          <li data-target="#myCarousel" data-slide-to="3"></li>
-        </ol>
 
-        <div class="carousel-inner" >
-        <div class="item active">
-          <img src="../assets/images/Quiberon.jpg" alt="Port Haliguen" class="img-responsive">
+      <h1 class="text-center"><b>Quelques-uns des ports que nous desservons</b></h1>
+
+      <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></button>
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"></button>
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3"></button>
         </div>
 
-        <div class="item">
-          <img src="../assets/images/Legue.jpg" alt="Port du Légué" class="img-responsive">
+        <div class="carousel-inner">
+
+          <div class="carousel-item active">
+            <img src="../assets/images/Quiberon.jpg" class="d-block w-100" alt="Port Haliguen">
+          </div>
+
+          <div class="carousel-item">
+            <img src="../assets/images/Legue.jpg" class="d-block w-100" alt="Port du Légué">
+          </div>
+
+          <div class="carousel-item">
+            <img src="../assets/images/Sauzon.jpg" class="d-block w-100" alt="Port de Sauzon">
+          </div>
+
+          <div class="carousel-item">
+            <img src="../assets/images/Saint-Gildas.jpg" class="d-block w-100" alt="Saint-Gildas">
+          </div>
+
         </div>
 
-        <div class="item">
-          <img src="../assets/images/Sauzon.jpg" alt="Port de Sauzon" class="img-responsive">
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+          <span class="visually-hidden">Précédent</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+          <span class="visually-hidden">Suivant</span>
+        </button>
+
       </div>
 
-        <div class="item">
-          <img src="../assets/images/Saint-Gildas.jpg" alt="Saint-Gildas" class="img-responsive">
-        </div>
-      </div>
-
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev" class="img-responsive small-img">
-          <span class="glyphicon glyphicon-chevron-left"></span>
-          <span class="sr-only"> <- Précédent</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-          <span class="sr-only">Suivant -> </span>
-        </a>
-      </div>
-    </div>  
+    </div>
   </div>
 </div>

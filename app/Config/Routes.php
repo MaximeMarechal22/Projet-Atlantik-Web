@@ -10,7 +10,9 @@ $routes->get('accueil', 'Visiteur::accueil');
 
 $routes->match(['get', 'post'], 'seconnecter', 'Visiteur::seConnecter');    
 $routes->match(['get', 'post'], 'creeruncompte', 'Visiteur::creerUnCompte');
-$routes->match(['get', 'post'], 'sedeconnecter', 'Visiteur::seDeconnecter');
+$routes->match(['get', 'post'], 'sedeconnecter', 'Client::seDeconnecter');
+$routes->match(['get', 'post'], 'sedeconnecter', 'Administrateur::seDeconnecter');
+$routes->match(['get', 'post'], 'modifiermoncompte', 'Client::modifierMonCompte');
 
 $routes->get('voirlesliaisons', 'Visiteur::voirlesliaisons');
 

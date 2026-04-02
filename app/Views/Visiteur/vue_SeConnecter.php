@@ -12,9 +12,7 @@
 
   <input type="text" id="txtIdentifiant" name="txtIdentifiant" 
          placeholder="Identifiant" 
-         required 
-         pattern="^[a-zA-ZÀ-ÿ0-9\-]+$" 
-         maxlength="30">
+         required>
   <br><br>
 
   <input type="password" id="txtMotDePasse" name="txtMotDePasse" 
