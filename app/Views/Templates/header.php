@@ -12,27 +12,23 @@
     <title>Atlantik</title>
 </head>
 <body>
-<nav class="navbar navbar-light bg-">
-  <a class="navbar-brand" href="<?php echo site_url('accueil') ?>">
-    <img src="../../../assets/images/Atlantik.jpg" width="35" height="35" class="d-inline-block align-top">
-    Atlantik
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <center>
+    <a class="navbar-brand" href="<?php echo site_url('accueil') ?>">
+    <img src="../../../assets/images/Atlantik.png" width="30" height="30" class="d-inline-block align-center"> Atlantik
+  </center>
     <?php
         $session = session();
         if(!is_null($session->get('identifiant')) or !is_null($session->get('Identifiant'))) : ?>
-        <a href="<?php echo site_url('sedeconnecter') ?>"><button class="btn btn-outline-danger" type="button">Se déconnecter</button></a>&nbsp;&nbsp;
-        <?php if ($session->get('profil') == 'Administrateur') : ?>
-            <a href="<?php echo site_url('ajouterproduit') ?>">Ajouter un produit</a>&nbsp;&nbsp;
-            <a href="<?php echo site_url('voircommandesproduits') ?>">Voir commandes-produits</a>&nbsp;&nbsp;
-            <?php endif;  ?>
+        <a href="<?php echo site_url('sedeconnecter') ?>"><button class="btn btn-outline-danger" type="button">Se déconnecter</button></a>
         
-    <?php else : ?>
-        <a href="<?php echo site_url('seconnecter') ?>"><button class="btn btn-outline-success" type="button">Se connecter</button></a>
+    <?php else: ?>
+      <a href="<?php echo site_url('seconnecter') ?>"><button class="btn btn-outline-success" type="button">Se connecter</button></a>
         ou
-        <a href="<?php echo site_url('creeruncompte') ?>"><button class="btn btn-outline-success" type="button">Créer un compte</button></a>&nbsp;&nbsp;
-    <?php endif; ?>
-    <a href="<?php echo site_url('voirlesliaisons') ?>"><button class="btn btn-outline-dark" type="button">Voir les liaisons par secteur</button></a>&nbsp;&nbsp;
-    <a href="<?php echo site_url('voirlesproduitsavecpagination') ?>"><button class="btn btn-outline-dark" type="button">Lister les produits (par 3)</button></a>&nbsp;&nbsp;
-  </a>
+        <a href="<?php echo site_url('creeruncompte') ?>"><button class="btn btn-outline-success" type="button">Créer un compte</button></a>
+    <?php endif ?>
+    <a href="<?php echo site_url('voirlesliaisons') ?>"><button class="btn btn-outline-info" type="button">Voir les liaisons par secteur</button></a>
+        
 </nav>
 
   

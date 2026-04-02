@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use App\Models\ModeleClient;
 use App\Models\ModeleAdministrateur;
+use App\Models\ModeleSecteur;
 helper(['assets']);
 class Visiteur extends BaseController
 {
@@ -129,6 +130,24 @@ class Visiteur extends BaseController
     {
         session()->destroy();
         return redirect()->to('seconnecter');
+    }
+
+    public function voirLesLiaisons()
+    {
+        helper(['form']);
+        $session = session();
+
+        $modeleSecteur = new ModeleSecteur();
+        $donnees['lesSecteurs'] = $modeleSecteur->getAllSecteur();
+        $donnees['TitreDeLaPage'] = 'Les liaisons par secteur';
+        
+        if (!$this->request->is('post')) {
+            return view('Templates/Header')
+                .view('Visiteur/vue_LiaisonsParSecteur', $donnees)
+                .view('Templates/Footer');
+        }
+        
+        
     }
 }
 
