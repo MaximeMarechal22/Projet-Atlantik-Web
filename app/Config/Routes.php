@@ -11,3 +11,4 @@ $routes->match(['get', 'post'], 'seconnecter', 'Visiteur::seConnecter');
 $routes->match(['get', 'post'], 'creeruncompte', 'Visiteur::creerUnCompte');
 $routes->match(['get', 'post'], 'sedeconnecter', 'Visiteur::seDeconnecter');
 
+$routes->get('voirlesliaisons', 'Visiteur::voirlesliaisons');
