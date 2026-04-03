@@ -13,14 +13,13 @@
     {
         if ($ligne->nomSecteur === $dernierSecteur)
         {
-            $table->addRow(" ", anchor("/voirlesliaisons/". $ligne->noLiaison,$ligne->noLiaison , "class = btn btn-outline-info"), $ligne->distance, $ligne->portDepart, $ligne->portArrivee);
+            $table->addRow(" ", anchor("/voirlesliaisons/". $ligne->noLiaison, $ligne->noLiaison, "class = btn btn-outline-info"), $ligne->distance, $ligne->portDepart, $ligne->portArrivee);
         }
         else
         {
             $dernierSecteur = $ligne->nomSecteur;
-            $table->addRow($dernierSecteur, anchor("/voirlesliaisons/". $ligne->noLiaison,$ligne->noLiaison , "class = btn btn-outline-info"), $ligne->distance, $ligne->portDepart, $ligne->portArrivee);
+            $table->addRow($dernierSecteur, anchor("/voirlesliaisons/". $ligne->noLiaison, $ligne->noLiaison, "class = btn btn-outline-info"), $ligne->distance, $ligne->portDepart, $ligne->portArrivee);
         }
-        
     }
 
     echo $table->generate();

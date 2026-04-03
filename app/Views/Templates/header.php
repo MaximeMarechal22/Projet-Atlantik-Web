@@ -26,6 +26,12 @@
         </button>
       </a>
 
+      <a href="<?php echo site_url('voirleshoraires') ?>">
+        <button class="btn btn-outline-success me-2" type="button">
+          🕛 Voir les horaires
+        </button>
+      </a>
+
       <?php
         $session = session();
         if(!is_null($session->get('identifiant')) or !is_null($session->get('Identifiant'))) : ?>

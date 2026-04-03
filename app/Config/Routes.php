@@ -14,6 +14,9 @@ $routes->match(['get', 'post'], 'sedeconnecter', 'Client::seDeconnecter');
 $routes->match(['get', 'post'], 'sedeconnecter', 'Administrateur::seDeconnecter');
 $routes->match(['get', 'post'], 'modifiermoncompte', 'Client::modifierMonCompte');
 
+$routes->get('voirlesliaisons/(:alphanum)', 'Visiteur::voirlesliaisons/$1');
 $routes->get('voirlesliaisons', 'Visiteur::voirlesliaisons');
+
+$routes->get('voirleshoraires', 'Visiteur::voirleshoraires');
 
 $routes->match(['get', 'post'], 'voirlesliaisons', 'Visiteur::voirLesLiaisons');

@@ -11,6 +11,8 @@
           <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"></button>
           <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"></button>
           <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3"></button>
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4"></button>
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="5"></button>
         </div>
 
         <div class="carousel-inner">
@@ -28,7 +30,15 @@
           </div>
 
           <div class="carousel-item">
-            <img src="../assets/images/Saint-Gildas.jpg" class="d-block w-100" alt="Saint-Gildas">
+            <img src="../assets/images/Saint-Gildas.jpg" class="d-block w-100" alt="Port de Saint-Gildas">
+          </div>
+
+          <div class="carousel-item">
+            <img src="../assets/images/Lorient.jpg" class="d-block w-100" alt="Port de Lorient">
+          </div>
+
+          <div class="carousel-item">
+            <img src="../assets/images/Ile_Groix.jpg" class="d-block w-100" alt="Port de l'Île de Groix">
           </div>
 
         </div>
@@ -42,7 +52,6 @@
           <span class="carousel-control-next-icon"></span>
           <span class="visually-hidden">Suivant</span>
         </button>
-
       </div>
 
     </div>

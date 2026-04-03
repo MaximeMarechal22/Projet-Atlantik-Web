@@ -3,6 +3,7 @@
     use App\Models\ModeleClient;
     use App\Models\ModeleAdministrateur;
     use App\Models\ModeleSecteur;
+    use App\Models\ModeleLiaison;
     helper(['assets']);
     class Visiteur extends BaseController
     {
@@ -48,6 +49,7 @@
 
             if ($clientRetourne != null) {
                 $session->set('Identifiant', $clientRetourne->MEL);
+
                 $data['Identifiant'] = $Identifiant;
                 echo view('Templates/Header', $data);
                 echo view('Visiteur/vue_ConnexionReussie');
@@ -125,20 +127,63 @@
                 .view('Templates/Footer');
         }
 
-        public function voirLesLiaisons()
+        public function voirLesHoraires()
         {
             helper(['form']);
             $session = session();
 
-            $modeleSecteur = new ModeleSecteur();
-            $donnees['lesSecteurs'] = $modeleSecteur->getAllSecteur();
-            $donnees['TitreDeLaPage'] = 'Les liaisons par secteur';
+            $donnees['TitreDeLaPage'] = 'Les horaires';
             
             if (!$this->request->is('post')) {
                 return view('Templates/Header')
-                    .view('Visiteur/vue_LiaisonsParSecteur', $donnees)
+                    .view('Visiteur/vue_VoirLesHoraires', $donnees)
                     .view('Templates/Footer');
             }
+        }
+
+        public function voirLesLiaisons($referenceLiaison = null)
+        {
+            helper(['form']);
+            $session = session();
+            $modeleSecteur = new ModeleSecteur();
+            $modeleLiaison = new ModeleLiaison();
+
+            if ($referenceLiaison === null)
+            {
+            $donnees['lesSecteurs'] = $modeleSecteur->getAllSecteur();
+            $donnees['TitreDeLaPage'] = 'Les liaisons par secteur';
+            
+            return view('Templates/Header')
+                .view('Visiteur/vue_LiaisonsParSecteur', $donnees)
+                .view('Templates/Footer');
+            }
+            else
+            {
+                $data['uneLiaison'] = $modeleLiaison ->find($referenceLiaison);
+                 if (empty($data['uneLiaison'])) {
+                    throw\CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+                 }
+            }
+            $portDepart = $modeleLiaison->getPortDepart($referenceLiaison);
+            $portArrivee = $modeleLiaison->getPortArrivee($referenceLiaison);
+
+            $data['TitreDeLaPage'] = "Liaison n°".$data['uneLiaison']->NOLIAISON .": ".$portDepart->portDepart." - ".$portArrivee->portArrivee;
+
+
+            return view('Templates/Header')
+            . view('Visiteur/vue_VoirDetailUneLiaison', $data)
+            . view('Templates/Footer');
+            
+        }
+        
+        public function voirLaLiaison()
+        {
+            helper(['form']);
+            $session = session();
+
+
+
+
         }
     }
 ?>
