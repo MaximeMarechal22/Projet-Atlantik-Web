@@ -4,6 +4,7 @@
     use App\Models\ModeleAdministrateur;
     use App\Models\ModeleSecteur;
     use App\Models\ModeleLiaison;
+    use App\Models\ModeleTraversee;
     helper(['assets']);
     class Visiteur extends BaseController
     {
@@ -147,6 +148,7 @@
             $session = session();
             $modeleSecteur = new ModeleSecteur();
             $modeleLiaison = new ModeleLiaison();
+            $modeleTraversee = new ModeleTraversee();
 
             if ($referenceLiaison === null)
             {
@@ -168,22 +170,11 @@
             $portArrivee = $modeleLiaison->getPortArrivee($referenceLiaison);
 
             $data['TitreDeLaPage'] = "Liaison n°".$data['uneLiaison']->NOLIAISON .": ".$portDepart->portDepart." - ".$portArrivee->portArrivee;
-
+            $data['lesTraversees'] = $modeleTraversee->getAllTraversee($referenceLiaison);
 
             return view('Templates/Header')
             . view('Visiteur/vue_VoirDetailUneLiaison', $data)
             . view('Templates/Footer');
-            
-        }
-        
-        public function voirLaLiaison()
-        {
-            helper(['form']);
-            $session = session();
-
-
-
-
         }
     }
 ?>

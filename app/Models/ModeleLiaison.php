@@ -30,3 +30,4 @@ class ModeleLiaison extends Model
             ->first();
     }
 }
+?>
