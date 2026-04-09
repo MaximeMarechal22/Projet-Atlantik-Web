@@ -1,6 +1,9 @@
 <center><h2><?php echo $TitreDeLaPage ?></h2></center>
 
-<?php
+<?php if (empty($lesTraversees)): ?>
+    <center><div class="alert alert-danger">Aucune traversée trouvée pour la liaison choisie.</div></center>
+<?php else: ?>
+    <?php
     $periodes = [];
     foreach ($lesTraversees as $t) {
         $key = $t->NOPERIODE;
@@ -9,9 +12,6 @@
         }
     }
 
-    $tableau = [];
-    $libellesCategorie = [];
-    $libellesType = [];
     foreach ($lesTraversees as $t) {
         $cat  = $t->LETTRECATEGORIE;
         $type = $cat . $t->NOTYPE;
@@ -52,4 +52,5 @@
         }
     }
     echo "</tbody></table>";
-?>
+    ?>
+<?php endif; ?>
