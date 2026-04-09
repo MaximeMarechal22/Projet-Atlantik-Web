@@ -16,7 +16,7 @@ class ModeleSecteur extends Model
             ->join('port p1', 'li.NOPORT_DEPART = p1.NOPORT', 'inner')
             ->join('port p2', 'li.NOPORT_ARRIVEE = p2.NOPORT', 'inner')
             ->select("sec.NOM as nomSecteur, li.NOLIAISON as noLiaison, li.DISTANCE as distance , p1.NOM AS portDepart, p2.NOM AS portArrivee")
-            ->orderBy('sec.NOM', 'ASC')
+            ->orderBy('sec.NOSECTEUR', 'ASC')
             ->get()->getResult();
     }
 }

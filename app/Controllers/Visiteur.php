@@ -50,6 +50,7 @@
 
             if ($clientRetourne != null) {
                 $session->set('Identifiant', $clientRetourne->MEL);
+                $session->set('NOCLIENT', $clientRetourne->NOCLIENT);
 
                 $data['Identifiant'] = $Identifiant;
                 echo view('Templates/Header', $data);

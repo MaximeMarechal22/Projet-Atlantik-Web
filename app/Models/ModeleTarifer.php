@@ -12,14 +12,14 @@ class ModeleTarifer extends Model
 
     public function getAllTraversee($referenceLiaison)
     {
-        $date = date("2021-06-16");
-        $condition = "NOLIAISON = $referenceLiaison AND DATEDEBUT > $date";
-        return $this->join('periode', 'tarifer.NOPERIODE = periode.NOPERIODE', 'inner')
-            ->join('categorie', 'tarifer.LETTRECATEGORIE = categorie.LETTRECATEGORIE', 'inner')
-            ->join('type', 'tarifer.LETTRECATEGORIE = type.LETTRECATEGORIE AND tarifer.NOTYPE = type.NOTYPE', 'inner')
-            ->select("CONCAT(tarifer.LETTRECATEGORIE, '\n', categorie.LIBELLE) AS 'Catégorie', CONCAT(type.LETTRECATEGORIE, type.NOTYPE, ' - ',  type.LIBELLE) AS 'Type', DATEDEBUT, DATEFIN, tarifer.TARIF")
-            ->where($condition)
-            ->get()->getResult();
+    $date = date("Y-m-d");
+    $condition = "tarifer.NOLIAISON = $referenceLiaison AND periode.DATEFIN ";
+    return $this->join('periode', 'tarifer.NOPERIODE = periode.NOPERIODE', 'inner')
+        ->join('categorie', 'tarifer.LETTRECATEGORIE = categorie.LETTRECATEGORIE', 'inner')
+        ->join('type', 'tarifer.LETTRECATEGORIE = type.LETTRECATEGORIE AND tarifer.NOTYPE = type.NOTYPE', 'inner')
+        ->select("tarifer.LETTRECATEGORIE, '<br>', categorie.LIBELLE AS Categorie, type.LETTRECATEGORIE, type.NOTYPE, ' - ', type.LIBELLE, periode.NOPERIODE, periode.DATEDEBUT, periode.DATEFIN, tarifer.TARIF")
+        ->where($condition)
+        ->get()->getResult();
     }
 }
 ?>

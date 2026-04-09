@@ -8,55 +8,39 @@
 ?>
   <form method="post" action="">
 
-  <input type="text" id="txtNom" name="txtNom" placeholder="Nom"
-         required
-         pattern="^[a-zA-ZÀ-ÿ\- ]+$"
-         maxlength="30">
-  <br><br>
+       <input type="text" name="txtNom"
+              value="<?= esc($client->NOM) ?>" required>
+       <br><br>
 
-  <input type="text" id="txtPrenom" name="txtPrenom" placeholder="Prénom"
-         required
-         pattern="^[a-zA-ZÀ-ÿ\- ]+$"
-         maxlength="30">
-  <br><br>
+       <input type="text" name="txtPrenom"
+              value="<?= esc($client->PRENOM) ?>" required>
+       <br><br>
 
-  <input type="text" id="txtAdresse" name="txtAdresse" placeholder="Adresse"
-         required
-         maxlength="100">
-  <br><br>
+       <input type="text" name="txtAdresse"
+              value="<?= esc($client->ADRESSE) ?>" required>
+       <br><br>
 
-  <input type="text" id="txtCodePostal" name="txtCodePostal" placeholder="Code postal"
-         required
-         pattern="^[0-9]{5}$"
-         maxlength="5"
-         inputmode="numeric">
-  <br><br>
+       <input type="text" name="txtCodePostal"
+              value="<?= esc($client->CODEPOSTAL) ?>" required>
+       <br><br>
 
-  <input type="text" id="txtVille" name="txtVille" placeholder="Ville"
-         required
-         maxlength="30">
-  <br><br>
+       <input type="text" name="txtVille"
+              value="<?= esc($client->VILLE) ?>" required>
+       <br><br>
 
-  <input type="text" id="txtFixe" name="txtFixe" placeholder="Téléphone fixe (ex: 01.23.45.67.89)"
-         required
-         pattern="^0[1-5](\.\d{2}){4}$">
-  <br><br>
+       <input type="text" name="txtFixe"
+              value="<?= esc($client->TELEPHONEFIXE) ?>" required>
+       <br><br>
 
-  <input type="text" id="txtMobile" name="txtMobile" placeholder="Téléphone mobile (ex: 06.12.34.56.78)"
-         required
-         pattern="^0[67](\.\d{2}){4}$">
-  <br><br>
+       <input type="text" name="txtMobile"
+              value="<?= esc($client->TELEPHONEMOBILE) ?>" required>
 
-  <input type="email" id="txtMel" name="txtMel" placeholder="Mél"
-         required
-         maxlength="254">
-  <br><br>
+       <br><br>
 
-  <input type="password" id="txtMdP" name="txtMdP" placeholder="Mot de passe"
-         required
-         minlength="8"
-         maxlength="30">
-  <br><br>
+       <input type="email" name="txtMel"
+              value="<?= esc($client->MEL) ?>" required>
+       <br><br>
+       
 
 <button class="btn btn-success" type = 'submit'>Valider</button>
 </center>

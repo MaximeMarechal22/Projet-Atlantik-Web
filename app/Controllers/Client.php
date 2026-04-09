@@ -9,17 +9,25 @@
             
 
     public function modifierMonCompte()
-        {
-            helper(['form']);
-            $session = session();
-    
-            $data['TitreDeLaPage'] = 'Modifier mon compte';
-            if (!$this->request->is('post')) {
-                return view('Templates/Header', $data)
-                . view('Client/vue_ModifierMonCompte')
-                . view('Templates/Footer');
-            }
-            $reglesValidation = [
+    {
+        helper(['form']);
+        $session = session();
+
+        $data['TitreDeLaPage'] = 'Modifier mon compte';
+
+        $modeleClient = new ModeleClient();
+        $idClient = $session->get('NOCLIENT');
+        $client = $modeleClient->find($idClient);
+
+        $data['client'] = $client;
+
+        if (!$this->request->is('post')) {
+            return view('Templates/Header', $data)
+            . view('Client/vue_ModifierMonCompte', $data)
+            . view('Templates/Footer');
+        }
+
+        $reglesValidation = [
             'txtNom' => 'required|regex_match[/^[a-zA-ZÀ-ÿ\- ]+$/]|max_length[30]',
             'txtPrenom' => 'required|regex_match[/^[a-zA-ZÀ-ÿ\- ]+$/]|max_length[30]',
             'txtAdresse' => 'required|max_length[100]',
@@ -27,32 +35,36 @@
             'txtVille' => 'required|max_length[30]',
             'txtFixe' => 'required|regex_match[/^0[1-5](\.\d{2}){4}$/]',
             'txtMobile' => 'required|regex_match[/^0[67](\.\d{2}){4}$/]',
-            'txtMel' => 'required|max_length[254]|valid_email|',
-            'txtMdP' => 'required|min_length[8]|max_length[30]',
-            ];
-            
-            if (!$this->validate($reglesValidation)) {
-                $data['TitreDeLaPage'] = "Saisie formulaire incorrecte";
-                helper(['form']);
-                return view('Templates/Header')
-                . view('Visiteur/vue_CreerUnCompte', $data)
-                . view('Templates/Footer');
-            }
+            'txtMel' => 'required|max_length[254]|valid_email',
+            'txtMdP' => 'permit_empty|min_length[8]|max_length[30]',
+        ];
 
-            $donneesAInserer = array(
-                'NOM' => $this->request->getPost('txtNom'),
-                'PRENOM' => $this->request->getPost('txtPrenom'),
-                'ADRESSE' => $this->request->getPost('txtAdresse'),
-                'CODEPOSTAL' => $this->request->getPost('txtCodePostal'),
-                'VILLE' => $this->request->getPost('txtVille'),
-                'TELEPHONEFIXE' => $this->request->getPost('txtFixe'),
-                'TELEPHONEMOBILE' => $this->request->getPost('txtMobile'),
-                'MEL' => $this->request->getPost('txtMel'),
-                'MOTDEPASSE' => $this->request->getPost('txtMdP'),
-            ); 
-            $modeleClient = new ModeleClient();
-            $donnees['clientModifie'] = $modeleClient->update($donneesAInserer, false);
+        if (!$this->validate($reglesValidation)) {
+            $data['TitreDeLaPage'] = "Saisie formulaire incorrecte";
+            return view('Templates/Header', $data)
+            . view('Client/vue_ModifierMonCompte', $data)
+            . view('Templates/Footer');
         }
+
+        $donneesAInserer = [
+            'NOM' => $this->request->getPost('txtNom'),
+            'PRENOM' => $this->request->getPost('txtPrenom'),
+            'ADRESSE' => $this->request->getPost('txtAdresse'),
+            'CODEPOSTAL' => $this->request->getPost('txtCodePostal'),
+            'VILLE' => $this->request->getPost('txtVille'),
+            'TELEPHONEFIXE' => $this->request->getPost('txtFixe'),
+            'TELEPHONEMOBILE' => $this->request->getPost('txtMobile'),
+            'MEL' => $this->request->getPost('txtMel'),
+        ];
+
+        if ($this->request->getPost('txtMdP')) {
+            $donneesAInserer['MOTDEPASSE'] = $this->request->getPost('txtMdP');
+        }
+
+        $modeleClient->update($idClient, $donneesAInserer);
+
+        return redirect()->to('accueil');
+    }
 
         public function seDeconnecter()
         {
