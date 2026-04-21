@@ -13,6 +13,7 @@ $routes->match(['get', 'post'], 'creeruncompte', 'Visiteur::creerUnCompte');
 $routes->match(['get', 'post'], 'sedeconnecter', 'Client::seDeconnecter');
 $routes->match(['get', 'post'], 'sedeconnecter', 'Administrateur::seDeconnecter');
 $routes->match(['get', 'post'], 'modifiermoncompte', 'Client::modifierMonCompte');
+$routes->match(['get', 'post'], 'afficherreservations', 'Client::afficherReservations');
 
 $routes->get('voirlesliaisons/(:alphanum)', 'Visiteur::voirlesliaisons/$1');
 $routes->get('voirlesliaisons', 'Visiteur::voirlesliaisons');

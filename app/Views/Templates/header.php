@@ -45,6 +45,12 @@
           <ul class="dropdown-menu dropdown-menu-end">
 
             <li>
+              <a class="dropdown-item" href="<?php echo site_url('afficherreservations') ?>">
+                Voir mes réservations
+              </a>
+            </li>
+
+            <li>
               <a class="dropdown-item" href="<?php echo site_url('modifiermoncompte') ?>">
                 Modifier mes infos
               </a>
