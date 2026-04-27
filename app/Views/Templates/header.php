@@ -28,19 +28,22 @@
 
       <a href="<?php echo site_url('voirleshoraires') ?>">
         <button class="btn btn-outline-success me-2" type="button">
-          🕛 Voir les horaires
+          🕛 Voir les horaires des traversées
         </button>
       </a>
 
-      <?php
-        $session = session();
-        if(!is_null($session->get('identifiant')) or !is_null($session->get('Identifiant'))) : ?>
+    <?php
+      $session = session();
+      $identifiant = $session->get('identifiant') ?? $session->get('Identifiant');
+      $profil = $session->get('profil');
+      ?>
 
-          <div class="dropdown">
+      <?php if (!is_null($identifiant)) : ?>
 
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-              👤 Mon compte
-            </button>
+        <div class="dropdown">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            👤 Mon compte
+          </button>
 
           <ul class="dropdown-menu dropdown-menu-end">
 
@@ -50,21 +53,24 @@
               </a>
             </li>
 
-            <li>
-              <a class="dropdown-item" href="<?php echo site_url('modifiermoncompte') ?>">
-                Modifier mes infos
-              </a>
-            </li>
+            <?php if (!is_null($session->get('NOCLIENT'))) : ?>
+              <li>
+                <a class="dropdown-item" href="<?php echo site_url('modifiermoncompte') ?>">
+                  Modifier mes infos
+                </a>
+              </li>
+            <?php endif; ?>
 
-          <li><hr class="dropdown-divider"></li>
+            <li><hr class="dropdown-divider"></li>
 
             <li>
               <a class="dropdown-item text-danger" href="<?php echo site_url('sedeconnecter') ?>">
                 Se déconnecter
               </a>
             </li>
+
           </ul>
-    </div>
+        </div>
 
       <?php else: ?>
 

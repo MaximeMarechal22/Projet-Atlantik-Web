@@ -4,10 +4,10 @@
     use App\Models\ModeleAdministrateur;
     use App\Models\ModeleSecteur;
     helper(['assets']);
+
     class Client extends BaseController
     {
-            
-
+        
     public function modifierMonCompte()
     {
         helper(['form']);

@@ -5,6 +5,7 @@
     use App\Models\ModeleSecteur;
     use App\Models\ModeleLiaison;
     use App\Models\ModeleTarifer;
+    use App\Models\ModelePeriode;
     helper(['assets']);
     class Visiteur extends BaseController
     {
@@ -129,18 +130,24 @@
                 .view('Templates/Footer');
         }
 
-        public function voirLesHoraires()
+        public function voirLesHoraires($referenceLiaison = null)
         {
             helper(['form']);
             $session = session();
+            $modeleSecteur = new ModeleSecteur();
+            $modeleLiaison = new ModeleLiaison();
+            $modelePeriode = new ModelePeriode();
 
+            $donnees['lesSecteurs'] = $modeleSecteur->getAllSecteur();
+            $donnees['lesSecteurs'] = $modeleSecteur->getSecteurs();
             $donnees['TitreDeLaPage'] = 'Les horaires';
+            $donnees['liaison'] = $modeleSecteur -> getAllLiaisonsParSecteur($referenceLiaison);
+            $donnees['periodes'] = $modelePeriode -> findAll();
             
-            if (!$this->request->is('post')) {
-                return view('Templates/Header')
-                    .view('Visiteur/vue_VoirLesHoraires', $donnees)
-                    .view('Templates/Footer');
-            }
+            return view('Templates/Header')
+                .view('Visiteur/vue_VoirLesHoraires', $donnees)
+                .view('Templates/Footer');
+
         }
 
         public function voirLesLiaisons($referenceLiaison = null)
