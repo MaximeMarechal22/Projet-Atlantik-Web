@@ -59,6 +59,7 @@
   <br><br>
 
 <button class="btn btn-success" type = 'submit'>Créer mon compte</button>
+</form>
 </br>
 <a href="<?php echo site_url('seconnecter') ?>">Déjà un compte ? Connectez-vous !</a>
 </center>

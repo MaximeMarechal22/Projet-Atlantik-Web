@@ -33,7 +33,7 @@ class ModeleSecteur extends Model
         ->join('port port_depart', 'li.noport_depart = port_depart.noport',  'inner')
         ->join('port port_arrivee', 'li.noport_arrivee = port_arrivee.noport',  'inner')
         ->where($condition)
-        ->select('port_depart.nom as portDepart, port_arrivee.nom as portArrivee')
+        ->select('li.NOLIAISON as noLiaison, port_depart.nom as portDepart, port_arrivee.nom as portArrivee')
         ->get()->getResult();
     }
 }

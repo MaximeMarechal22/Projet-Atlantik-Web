@@ -9,4 +9,13 @@ class ModelePeriode extends Model
     protected $useAutoIncrement = true;
     protected $returnType = 'object';
     protected $allowedFields = ['DATEDEBUT, DATEFIN'];
+
+    public function getAllDatesSuperieuresAjd()
+    {
+        $date = date('Y-m-d');
+        $condition = ["DATEDEBUT >" => $date];
+        return $this->select("DATEDEBUT")
+            ->where($condition)
+            ->get()->getResult();
+    }
 }

@@ -132,7 +132,6 @@
 
         public function voirLesHoraires($referenceLiaison = null)
         {
-            helper(['form']);
             $session = session();
             $modeleSecteur = new ModeleSecteur();
             $modeleLiaison = new ModeleLiaison();
@@ -142,13 +141,29 @@
             $donnees['lesSecteurs'] = $modeleSecteur->getSecteurs();
             $donnees['TitreDeLaPage'] = 'Les horaires';
             $donnees['liaison'] = $modeleSecteur -> getAllLiaisonsParSecteur($referenceLiaison);
-            $donnees['periodes'] = $modelePeriode -> findAll();
+            $donnees['periodes'] = $modelePeriode -> getAllDatesSuperieuresAjd();
             
+            if (!isset($_POST['afficherTraversees'])) {
+                helper('form');
+                
+                return view('Templates/Header')
+                    .view('Visiteur/vue_VoirLesHoraires', $donnees)
+                    .view('Templates/Footer');
+        } else {
+            $donnees['lesSecteurs'] = $modeleSecteur->getAllSecteur();
+            $donnees['lesSecteurs'] = $modeleSecteur->getSecteurs();
+            $donnees['TitreDeLaPage'] = 'Les horaires post formulaire';
+            $donnees['liaison'] = $modeleSecteur -> getAllLiaisonsParSecteur($referenceLiaison);
+            $donnees['periodes'] = $modelePeriode -> getAllDatesSuperieuresAjd();
+            $liaisonSaisie = $this->request->getPost('liaisons');
+            $dateSaisie = $this->request->getPost('date');
+
             return view('Templates/Header')
                 .view('Visiteur/vue_VoirLesHoraires', $donnees)
                 .view('Templates/Footer');
-
         }
+        }
+    
 
         public function voirLesLiaisons($referenceLiaison = null)
         {

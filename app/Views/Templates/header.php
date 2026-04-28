@@ -42,7 +42,7 @@
 
         <div class="dropdown">
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            👤 Mon compte
+            👤 <?php echo $session->get('Identifiant') ?? $session->get('profil'); ?>
           </button>
 
           <ul class="dropdown-menu dropdown-menu-end">
