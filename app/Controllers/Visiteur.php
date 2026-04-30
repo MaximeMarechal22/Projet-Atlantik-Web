@@ -6,6 +6,9 @@
     use App\Models\ModeleLiaison;
     use App\Models\ModeleTarifer;
     use App\Models\ModelePeriode;
+    use App\Models\ModeleTraversee;
+    use App\Models\ModeleCategorie;
+
     helper(['assets']);
     class Visiteur extends BaseController
     {
@@ -132,14 +135,18 @@
 
         public function voirLesHoraires($referenceLiaison = null)
         {
+            helper(['form']);
             $session = session();
             $modeleSecteur = new ModeleSecteur();
             $modeleLiaison = new ModeleLiaison();
             $modelePeriode = new ModelePeriode();
+            $modeleTraversee = new ModeleTraversee();
+            $modeleCategorie = new ModeleCategorie();
 
+            $donnees['categories'] = $modeleCategorie->findAll();
             $donnees['lesSecteurs'] = $modeleSecteur->getAllSecteur();
             $donnees['lesSecteurs'] = $modeleSecteur->getSecteurs();
-            $donnees['TitreDeLaPage'] = 'Les horaires';
+            $donnees['TitreDeLaPage'] = 'Les horaires, par liaison et date';
             $donnees['liaison'] = $modeleSecteur -> getAllLiaisonsParSecteur($referenceLiaison);
             $donnees['periodes'] = $modelePeriode -> getAllDatesSuperieuresAjd();
             
@@ -149,19 +156,18 @@
                 return view('Templates/Header')
                     .view('Visiteur/vue_VoirLesHoraires', $donnees)
                     .view('Templates/Footer');
-        } else {
-            $donnees['lesSecteurs'] = $modeleSecteur->getAllSecteur();
-            $donnees['lesSecteurs'] = $modeleSecteur->getSecteurs();
-            $donnees['TitreDeLaPage'] = 'Les horaires post formulaire';
-            $donnees['liaison'] = $modeleSecteur -> getAllLiaisonsParSecteur($referenceLiaison);
-            $donnees['periodes'] = $modelePeriode -> getAllDatesSuperieuresAjd();
-            $liaisonSaisie = $this->request->getPost('liaisons');
-            $dateSaisie = $this->request->getPost('date');
-
-            return view('Templates/Header')
-                .view('Visiteur/vue_VoirLesHoraires', $donnees)
-                .view('Templates/Footer');
-        }
+            } else {
+                $donnees['lesSecteurs'] = $modeleSecteur->getAllSecteur();
+                $donnees['lesSecteurs'] = $modeleSecteur->getSecteurs();
+                $donnees['liaison'] = $modeleSecteur -> getAllLiaisonsParSecteur($referenceLiaison);
+                $donnees['periodes'] = $modelePeriode -> getAllDatesSuperieuresAjd();
+                $liaisonSaisie = $this->request->getPost('liaisons');
+                $dateSaisie = $this->request->getPost('date');
+                $donnees['TitreDeLaPage'] = 'Données passées';
+                return view('Templates/Header')
+                    .view('Visiteur/vue_VoirLesHoraires', $donnees)
+                    .view('Templates/Footer');
+            }
         }
     
 

@@ -1,16 +1,18 @@
 <center><h2><?php echo $TitreDeLaPage ?></h2></center>
 
-<?php if (empty($lesTraversees)): ?>
-    <center><div class="alert alert-danger">Aucune traversée trouvée pour la liaison choisie.</div></center>
-<?php else: ?>
-    <?php
-    $periodes = [];
-    foreach ($lesTraversees as $t) {
-        $key = $t->NOPERIODE;
-        if (!isset($periodes[$key])) {
-            $periodes[$key] = $t->DATEDEBUT . '<br>' . $t->DATEFIN;
+<?php 
+    if (empty($lesTraversees))
+        {
+        echo'<center><div class="alert alert-danger">Aucune traversée trouvée pour la liaison choisie.</div></center>';
         }
-    }
+    else
+        $periodes = [];
+        foreach ($lesTraversees as $t) {
+            $key = $t->NOPERIODE;
+            if (!isset($periodes[$key])) {
+                $periodes[$key] = $t->DATEDEBUT . '<br>' . $t->DATEFIN;
+            }
+        }
 
     foreach ($lesTraversees as $t) {
         $cat  = $t->LETTRECATEGORIE;
@@ -53,4 +55,3 @@
     }
     echo "</tbody></table>";
     ?>
-<?php endif; ?>
