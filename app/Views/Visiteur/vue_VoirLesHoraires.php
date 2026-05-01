@@ -43,8 +43,9 @@
             echo '<option>'.$periode->DATEDEBUT.'</option>';
         }
     echo '</select>';
-    echo "<button class='btn btn-success btn-sm' type ='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>
-    </form>";
+    echo " <button class='btn btn-success btn-sm' type ='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>
+    </form> </br>";
+    
 
 
     echo "</br> </div>";
