@@ -23,7 +23,7 @@
     Sélectionner la liaison et la date souhaitée </br>";
 
     echo '<form method="post" action="">
-    <select name="liaisons"> ';
+    <select name="liaisons">';
     if ($liaison == null)
         {
             echo '<option> Aucune laision pour le secteur choisi</option>';
@@ -42,10 +42,20 @@
         {
             echo '<option>'.$periode->DATEDEBUT.'</option>';
         }
-    echo '</select>';
-    echo " <button class='btn btn-success btn-sm' type ='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>
-    </form> </br>";
-    
 
+    echo '</select>';
+    echo " <button class='btn btn-success btn-sm' type ='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>";
+    echo "</form> </br>";
+
+
+    if (isset($message))
+        {
+            echo'<center><div class="alert alert-danger">'.$message.'</div></center>';
+        }
+    else
+        {
+            // faire le tableau
+        }
+    
 
     echo "</br> </div>";
