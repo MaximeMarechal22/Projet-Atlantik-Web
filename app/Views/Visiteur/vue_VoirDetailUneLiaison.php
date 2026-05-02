@@ -39,7 +39,7 @@ if (empty($lesTraversees)) {
     echo "</tr> </thead> <tbody>";
 
     foreach ($tableau as $cat => $types) {
-        $nbLignes    = count($types);
+        $nbLignes = count($types);
         $premiereLigne = true;
         foreach ($types as $typeKey => $tarifsParPeriode) {
             echo "<tr>";

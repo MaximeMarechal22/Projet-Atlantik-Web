@@ -68,6 +68,16 @@
                 {
                     echo $ports->portDepart . " - " . $ports->portArrivee
                         .'</br> Traversée pour le '. $dateSaisie .'. Sélectionnez la traversée souhaitée</br>';
+                        echo "<table class='table table-striped table-bordered'>
+                        <tr>
+                        Traversée
+                        <td>N°</td>
+                        <td>Heure</td>
+                        <td>Bateau</td>
+                        <td>A Passager</td>
+                        <td>B Passager</td>
+                        <td>C Passager</td>
+                        </tr>";
                 }
             }
         }
@@ -79,4 +89,4 @@
         
     
 
-    echo "</br> </div>";
+   
