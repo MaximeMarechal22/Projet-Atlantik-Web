@@ -44,18 +44,39 @@
         }
 
     echo '</select>';
-    echo " <button class='btn btn-success btn-sm' type ='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>";
-    echo "</form> </br>";
 
-
-    if (isset($message))
+    if(!isset($_POST['afficherTraversees']))
         {
+            echo " <button class='btn btn-success btn-sm' type ='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>
+            </form> </br>";
+        }
+    else
+    {
+        if (isset($message))
+        {
+            echo " <button class='btn btn-success btn-sm' type ='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>
+            </form> </br>";
             echo'<center><div class="alert alert-danger">'.$message.'</div></center>';
         }
     else
         {
-            // faire le tableau
+            if (isset($categories))
+            {
+                echo " <button class='btn btn-success btn-sm' type ='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>
+                </form> </br>";
+                foreach($liaisonRetour as $ports)
+                {
+                    echo $ports->portDepart . " - " . $ports->portArrivee
+                        .'</br> Traversée pour le '. $dateSaisie .'. Sélectionnez la traversée souhaitée</br>';
+                }
+            }
         }
+    }
+    
+
+
+    
+        
     
 
     echo "</br> </div>";

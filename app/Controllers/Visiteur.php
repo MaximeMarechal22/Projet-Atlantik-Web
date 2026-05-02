@@ -157,7 +157,7 @@
                     .view('Templates/Footer');
             } else {
                 $liaisonSaisie = $this->request->getPost('liaisons');
-                $dateSaisie = $this->request->getPost('date');
+                
                 if ($liaisonSaisie == 'Aucune laision pour le secteur choisi')
                     {
                         $donnees['message'] = 'Le secteur sélectionné ne comporte aucune liaison';
@@ -168,8 +168,8 @@
                 else
                 {
                     $donnees['categories'] = $modeleCategorie -> findAll();
-                    $donnees[''] = 
-                    $donnees['TitreDeLaPage'] = 'Données passées';
+                    $donnees['dateSaisie'] = $this->request->getPost('date');
+                    $donnees['liaisonRetour'] = $modeleLiaison -> getPortsLiaison($liaisonSaisie);
                     return view('Templates/Header')
                         .view('Visiteur/vue_VoirLesHoraires', $donnees)
                         .view('Templates/Footer');
