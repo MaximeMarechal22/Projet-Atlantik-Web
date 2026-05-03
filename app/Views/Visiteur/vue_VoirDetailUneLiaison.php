@@ -26,13 +26,13 @@ if (empty($lesTraversees)) {
 
     echo "<table class='table table-striped table-bordered'>";
     echo "<thead><tr>
-                <th>Catégorie</th>
-                <th>Type</th>
-                <th colspan='" . count($periodes) . "'>Périodes</th>
+            <th>Catégorie</th>
+            <th>Type</th>
+            <th colspan='" . count($periodes) . "'>Périodes</th>
             </tr>
             <tr>
-                <th></th>
-                <th></th>";
+            <th></th>
+            <th></th>";
     foreach ($periodes as $noperiode => $dates) {
         echo "<th>$dates</th>";
     }

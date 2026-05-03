@@ -22,30 +22,32 @@ class ModeleTraversee extends Model
         ->get()->getResult();
     }
 
-    public function getQuantiteEnregistrer($noTraversee, $lettreCategorie)
+    public function getQuantiteEnregistree($noTraversee, $lettreCategorie)
     {
-        $condition = "traversee.NOTRAVERSEE =  $noTraversee AND LETTRECATEGORIE = $lettreCategorie";
-        return $this->join('reservation', 'traversee.NOTRAVERSEE = reservation.NOTRAVERSEE', 'inner')
-        ->join('enregistrer', 'reservation.NORESERVATION = enregistrer.NORESERVATION','inner')
-        ->where($condition)
-        ->select('QUANTITERESERVEE')
-        ->get()->getResult();
+        $condition = "trav.NOTRAVERSEE = $noTraversee AND enregistrer.LETTRECATEGORIE = '$lettreCategorie'";
+        return $this->join('reservation', 'trav.NOTRAVERSEE = reservation.NOTRAVERSEE', 'inner')
+            ->join('enregistrer', 'reservation.NORESERVATION = enregistrer.NORESERVATION', 'inner')
+            ->where($condition)
+            ->select('SUM(enregistrer.QUANTITERESERVEE) as quantite')
+            ->get()->getRow();
     }
 
     public function getCapaciteMaximale($noTraversee, $lettreCategorie)
     {
-        $condition = "NOTRAVERSEE = $noTraversee AND LETTRECATEGORIE = $lettreCategorie";
-        return $this->join('contenir', 'NOBATEAU = contenir.NOBATEAU', 'inner')
-        ->where($condition)
-        ->select('CAPACITEMAX')
-        ->get()->getResult();
+        $condition = "trav.NOTRAVERSEE = $noTraversee AND contenir.LETTRECATEGORIE = '$lettreCategorie'";
+        return $this->join('contenir', 'trav.NOBATEAU = contenir.NOBATEAU', 'inner')
+            ->where($condition)
+            ->select('contenir.CAPACITEMAX')
+            ->get()->getRow();
     }
 
-    public function getLesTraverseesBateau($noLiaison, $dateTraversee)
+    public function getLesTraverseesBateaux($noLiaison, $dateDebut)
     {
-        $condition = "NOLIAISON = $noLiaison AND DATEHEUREDEPART LIKE $dateTraversee";
-        return $this->join('bateau', 'traversee.NOBATEAU = bateau.NOBATEAU', 'inner')
-        ->select("NOTRAVERSEE as numero, DATE_FORMAT(traversee.dateheuredepart, '%T') as heuredepart, ba.NOM as nom")
-        ->get()->getResult();
+        return $this->join('bateau', 'trav.NOBATEAU = bateau.NOBATEAU', 'inner')
+            ->join('periode', "DATE(DATEHEUREDEPART) BETWEEN periode.DATEDEBUT AND periode.DATEFIN", 'inner')
+            ->select("NOTRAVERSEE as numero, DATE_FORMAT(DATEHEUREDEPART, '%T') as heuredepart, bateau.NOM as nom")
+            ->where('trav.NOLIAISON', $noLiaison)
+            ->where('periode.DATEDEBUT', $dateDebut)
+            ->get()->getResult();
     }
 }

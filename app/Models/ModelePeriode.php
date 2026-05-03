@@ -12,10 +12,8 @@ class ModelePeriode extends Model
 
     public function getAllDatesSuperieuresAjd()
     {
-        $date = date('Y-m-d');
-        $condition = ["DATEDEBUT >" => $date];
-        return $this->select("DATEDEBUT")
-            ->where($condition)
-            ->get()->getResult();
+        
+    return $this->select("NOPERIODE, DATEDEBUT, DATEFIN")
+        ->get()->getResult();
     }
 }

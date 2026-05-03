@@ -143,41 +143,59 @@
             $modeleTraversee = new ModeleTraversee();
             $modeleCategorie = new ModeleCategorie();
 
-            $donnees['categories'] = $modeleCategorie -> findAll();
-            $donnees['lesSecteurs'] = $modeleSecteur -> getAllSecteur();
-            $donnees['lesSecteurs'] = $modeleSecteur -> getSecteurs();
+            $donnees['lesSecteurs'] = $modeleSecteur->getSecteurs();
             $donnees['TitreDeLaPage'] = 'Les horaires, par liaison et date';
-            $donnees['liaison'] = $modeleSecteur -> getAllLiaisonsParSecteur($referenceLiaison);
-            $donnees['periodes'] = $modelePeriode -> getAllDatesSuperieuresAjd();
-            
+            $donnees['liaison'] = $modeleSecteur->getAllLiaisonsParSecteur($referenceLiaison);
+            $donnees['periodes'] = $modelePeriode->getAllDatesSuperieuresAjd();
             if (!isset($_POST['afficherTraversees'])) {
-                helper('form');
                 return view('Templates/Header')
                     .view('Visiteur/vue_VoirLesHoraires', $donnees)
                     .view('Templates/Footer');
+
             } else {
                 $liaisonSaisie = $this->request->getPost('liaisons');
-                
-                if ($liaisonSaisie == 'Aucune laision pour le secteur choisi')
-                    {
-                        $donnees['message'] = 'Le secteur sélectionné ne comporte aucune liaison';
-                        return view('Templates/Header')
-                            .view('Visiteur/vue_VoirLesHoraires', $donnees)
-                            .view('Templates/Footer');
+
+                if ($liaisonSaisie == 'Aucune laision pour le secteur choisi') {
+                    $donnees['message'] = 'Le secteur sélectionné ne comporte aucune liaison';
+                    return view('Templates/Header')
+                        .view('Visiteur/vue_VoirLesHoraires', $donnees)
+                        .view('Templates/Footer');
+
+                } else {
+                    $dateSaisie = $this->request->getPost('date');
+                    $donnees['dateSaisie'] = $dateSaisie;
+                    $donnees['liaisonRetour'] = $modeleLiaison->getPortsLiaison($liaisonSaisie);
+                    $lesCategories = $modeleCategorie->findAll();
+                    $donnees['categories'] = $lesCategories;
+                    $tableauTraversees = [];
+                    $lesTraversees = $modeleTraversee->getLesTraverseesBateaux($liaisonSaisie, $dateSaisie);
+                    
+
+                    foreach ($lesTraversees as $traversee) {
+                        $ligne = [
+                            'numero' => $traversee->numero,
+                            'heure'  => $traversee->heuredepart,
+                            'bateau' => $traversee->nom,
+                            'places' => [],
+                        ];
+
+                        foreach ($lesCategories as $categorie) {
+                            $capacite   = $modeleTraversee->getCapaciteMaximale($traversee->numero, $categorie->LETTRECATEGORIE);
+                            $enregistre = $modeleTraversee->getQuantiteEnregistree($traversee->numero, $categorie->LETTRECATEGORIE);
+
+                            $ligne['places'][$categorie->LETTRECATEGORIE] = $capacite->CAPACITEMAX - $enregistre->quantite;
+                        }
+
+                        $tableauTraversees[] = $ligne;
                     }
-                else
-                {
-                    $donnees['categories'] = $modeleCategorie -> findAll();
-                    $donnees['dateSaisie'] = $this->request->getPost('date');
-                    $donnees['liaisonRetour'] = $modeleLiaison -> getPortsLiaison($liaisonSaisie);
+                    $donnees['tableauTraversees'] = $tableauTraversees;
+
                     return view('Templates/Header')
                         .view('Visiteur/vue_VoirLesHoraires', $donnees)
                         .view('Templates/Footer');
                 }
-                
             }
         }
-    
 
         public function voirLesLiaisons($referenceLiaison = null)
         {

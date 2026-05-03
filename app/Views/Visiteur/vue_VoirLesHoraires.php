@@ -9,7 +9,6 @@
         $attributsTableau = ["table_open" => "<table class='table table-striped'>",];
         $table = new \CodeIgniter\View\Table($attributsTableau);
         $table->setHeading(['Secteurs']);
-        
 
         foreach ($lesSecteurs as $unSecteur)
         {
@@ -17,17 +16,16 @@
         }
         echo $table->generate();
         echo "</div>";
-        
-    
+
     echo "<div class='col-10'>
     Sélectionner la liaison et la date souhaitée </br>";
 
     echo '<form method="post" action="">
     <select name="liaisons">';
     if ($liaison == null)
-        {
-            echo '<option> Aucune laision pour le secteur choisi</option>';
-        }
+    {
+        echo '<option> Aucune laision pour le secteur choisi</option>';
+    }
     else
     {
         foreach($liaison as $ports)
@@ -38,55 +36,74 @@
     echo '</select>';
     
     echo '<select name="date">';
-        foreach($periodes as $periode)
-        {
-            echo '<option>'.$periode->DATEDEBUT.'</option>';
-        }
-
+    foreach ($periodes as $periode)
+    {
+        echo '<option value="' . $periode->DATEDEBUT . '">' 
+            . $periode->DATEDEBUT. '</option>';
+    }
     echo '</select>';
 
-    if(!isset($_POST['afficherTraversees']))
-        {
-            echo " <button class='btn btn-success btn-sm' type ='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>
-            </form> </br>";
-        }
+    if (!isset($_POST['afficherTraversees']))
+    {
+        echo " <button class='btn btn-success btn-sm' type='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>
+        </form> </br>";
+    }
     else
     {
         if (isset($message))
         {
-            echo " <button class='btn btn-success btn-sm' type ='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>
+            echo " <button class='btn btn-success btn-sm' type='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>
             </form> </br>";
-            echo'<center><div class="alert alert-danger">'.$message.'</div></center>';
+            echo '<center><div class="alert alert-danger">'.$message.'</div></center>';
         }
-    else
+        else
         {
             if (isset($categories))
             {
-                echo " <button class='btn btn-success btn-sm' type ='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>
+                echo " <button class='btn btn-success btn-sm' type='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>
                 </form> </br>";
-                foreach($liaisonRetour as $ports)
+
+                foreach ($liaisonRetour as $ports)
                 {
                     echo $ports->portDepart . " - " . $ports->portArrivee
-                        .'</br> Traversée pour le '. $dateSaisie .'. Sélectionnez la traversée souhaitée</br>';
+                        . '</br> Traversées pour le ' . $dateSaisie . '. Sélectionnez la traversée souhaitée</br>';
+
+                    if (!empty($tableauTraversees))
+                    {
                         echo "<table class='table table-striped table-bordered'>
-                        <tr>
-                        Traversée
-                        <td>N°</td>
-                        <td>Heure</td>
-                        <td>Bateau</td>
-                        <td>A Passager</td>
-                        <td>B Passager</td>
-                        <td>C Passager</td>
-                        </tr>";
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Heure</th>
+                                    <th>Bateau</th>";
+                                    foreach ($categories as $cat)
+                                    {
+                                        echo "<th>" . $cat->LETTRECATEGORIE . " " . $cat->LIBELLE . "</th>";
+                                    }
+                        echo "      </tr>
+                            </thead>
+                            <tbody>";
+
+                        foreach ($tableauTraversees as $traversee)
+                        {
+                            echo "<tr>
+                                <td>" . anchor('/reserver/' . $traversee['numero'], $traversee['numero'], "class = btn btn-outline-info'") . "</td>
+                                <td>" . $traversee['heure'] . "</td>
+                                <td>" . $traversee['bateau'] . "</td>";
+
+                            foreach ($categories as $cat)
+                            {
+                                echo "<td>" . ($traversee['places'][$cat->LETTRECATEGORIE]) . "</td>";
+                            }
+                            echo "</tr>";
+                        }
+                        echo "</tbody></table>";
+                    }
+                    else
+                    {
+                        echo "<div class='alert alert-warning'>Aucun horaire pour cette date.</div>";
+                    }
                 }
             }
         }
     }
-    
-
-
-    
-        
-    
-
-   
