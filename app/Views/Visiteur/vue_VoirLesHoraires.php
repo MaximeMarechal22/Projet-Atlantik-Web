@@ -80,17 +80,25 @@
                                     {
                                         echo "<th>" . $cat->LETTRECATEGORIE . " " . $cat->LIBELLE . "</th>";
                                     }
-                        echo "      </tr>
+                        echo "</tr>
                             </thead>
                             <tbody>";
 
                         foreach ($tableauTraversees as $traversee)
                         {
-                            echo "<tr>
-                                <td>" . anchor('/reserver/' . $traversee['numero'], $traversee['numero'], "class = btn btn-outline-info'") . "</td>
-                                <td>" . $traversee['heure'] . "</td>
-                                <td>" . $traversee['bateau'] . "</td>";
+                            $session = session();
+                            if (!is_null($session->get('Identifiant')))
+                            {
+                                echo "<tr>
+                                    <td>" . anchor('/reserver/' . $traversee['numero'], $traversee['numero'], "class = btn btn-outline-info'") . "</td>";
+                            }
+                            else
+                            {
+                                echo "<tr>
+                                <td>" . $traversee['numero'] . "</td>";
 
+                            }
+                            echo "<td>" . $traversee['heure'] . "</td> <td>" . $traversee['bateau'] . "</td>";
                             foreach ($categories as $cat)
                             {
                                 echo "<td>" . ($traversee['places'][$cat->LETTRECATEGORIE]) . "</td>";

@@ -21,5 +21,8 @@
   
   <button class="btn btn-success" type = 'submit'>Se connecter</button>
 </form>
+</br>
+<a href="<?php echo site_url('creeruncompte') ?>">Pas de compte ? Inscrivez-vous !</a>
+
 
 </center>

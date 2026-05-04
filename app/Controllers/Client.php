@@ -66,6 +66,17 @@
         return redirect()->to('accueil');
     }
 
+    public function reserver()
+    {
+        helper(['form']);
+        $session = session();
+
+        $data['TitreDeLaPage'] = 'Réservation';
+        return view('Templates/Header', $data)
+            . view('Client/vue_Reserver', $data)
+            . view('Templates/Footer');
+    }
+
     public function afficherReservations()
     {
         helper(['form']);
