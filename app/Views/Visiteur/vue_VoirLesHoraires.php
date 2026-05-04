@@ -109,7 +109,7 @@
                     }
                     else
                     {
-                        echo "<div class='alert alert-warning'>Aucun horaire pour cette date.</div>";
+                        echo "<center> <div class='alert alert-warning'>Aucun horaire pour cette date.</div></center>";
                     }
                 }
             }
