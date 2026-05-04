@@ -1,5 +1,6 @@
 <center> <h2><?php echo '- '. $TitreDeLaPage. ' -' ?></h2>
 <h6> <i> Les réservations nécessitent un compte client </h6> </i> </center>
+<div class="container-fluid">
 
 <?php
     use CodeIgniter\I18n\Time;
@@ -52,7 +53,7 @@
     {
         if (isset($message))
         {
-            echo " <button class='btn btn-success btn-sm' type='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>
+            echo " <button class='btn btn-success btn-sm' type='submit' value='afficherTraversees' name='afficherTraversees'> Afficher les traversées</button>
             </form> </br>";
             echo '<center><div class="alert alert-danger">'.$message.'</div></center>';
         }
@@ -60,17 +61,20 @@
         {
             if (isset($categories))
             {
-                echo " <button class='btn btn-success btn-sm' type='submit' value='afficherTraversees' name='afficherTraversees'>Afficher les traversées</button>
+                echo " <button class='btn btn-success btn-sm' type='submit' value='afficherTraversees' name='afficherTraversees'> Afficher les traversées</button>
                 </form> </br>";
 
                 foreach ($liaisonRetour as $ports)
                 {
                     echo $ports->portDepart . " - " . $ports->portArrivee
-                        . '</br> Traversées pour le ' . $dateSaisie . '. Sélectionnez la traversée souhaitée</br>';
+                        . '</br> Traversées pour le ' . $dateSaisie . '. Sélectionnez la traversée souhaitée en cliquant sur son numéro </br>';
 
                     if (!empty($tableauTraversees))
                     {
                         echo "<table class='table table-striped table-bordered'>
+                            </br>
+                            <strong> Traversée </strong>
+                            &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
                             <thead>
                                 <tr>
                                     <th>N°</th>
@@ -94,7 +98,8 @@
                             }
                             else
                             {
-                                echo "<tr>
+                                echo "<strong> Places disponnibles par catégorie </strong>
+                                <tr>
                                 <td>" . $traversee['numero'] . "</td>";
 
                             }
@@ -104,8 +109,20 @@
                                 echo "<td>" . ($traversee['places'][$cat->LETTRECATEGORIE]) . "</td>";
                             }
                             echo "</tr>";
+                            echo "</tbody></table>";
+                            if (is_null($session->get('Identifiant')))
+                            {
+                                echo '<center>
+                                    <div class="alert alert-warning">
+                                    Vous devez être connecté pour pouvoir réserver.<br>
+                                    <a href="'.site_url("seconnecter").'" class="btn btn-white btn-sm">Se connecter</a>
+                                    ou
+                                    <a href="'.site_url("creeruncompte").'" class="btn btn-white btn-sm">Créer un compte</a>
+                                    </div>
+                                    </center>';
+                                
+                            }
                         }
-                        echo "</tbody></table>";
                     }
                     else
                     {
@@ -114,4 +131,7 @@
                 }
             }
         }
+        echo "</div> </div>";
     }
+?>
+</div>

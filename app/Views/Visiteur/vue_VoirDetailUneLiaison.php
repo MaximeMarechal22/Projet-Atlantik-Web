@@ -1,6 +1,8 @@
 <center><h2><?php echo $TitreDeLaPage ?></h2></center>
 
 <?php 
+$session = session();
+
 if (empty($lesTraversees)) {
     echo '<center><div class="alert alert-danger">Aucune traversée trouvée pour la liaison choisie.</div></center>';
 } else {
