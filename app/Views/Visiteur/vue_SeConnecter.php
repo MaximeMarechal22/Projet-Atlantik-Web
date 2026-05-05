@@ -10,8 +10,8 @@
 ?>
   <form method="post" action="">
 
-  <input type="text" id="txtIdentifiant" name="txtIdentifiant" 
-         placeholder="Identifiant" 
+  <input type="email" id="txtIdentifiant" name="txtIdentifiant" 
+         placeholder="Adresse e-mail" 
          required>
   <br><br>
 
