@@ -154,6 +154,8 @@
 
             } else {
                 $liaisonSaisie = $this->request->getPost('liaisons');
+                $dateSaisie = $this->request->getPost('date');
+               
 
                 if ($liaisonSaisie == 'Aucune laision pour le secteur choisi') {
                     $donnees['message'] = 'Le secteur sélectionné ne comporte aucune liaison';
@@ -162,7 +164,7 @@
                         .view('Templates/Footer');
 
                 } else {
-                    $dateSaisie = $this->request->getPost('date');
+                    
                     $donnees['dateSaisie'] = $dateSaisie;
                     $donnees['liaisonRetour'] = $modeleLiaison->getPortsLiaison($liaisonSaisie);
                     $lesCategories = $modeleCategorie->findAll();

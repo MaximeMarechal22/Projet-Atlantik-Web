@@ -3,6 +3,8 @@
     use App\Models\ModeleClient;
     use App\Models\ModeleAdministrateur;
     use App\Models\ModeleSecteur;
+    use App\Models\ModeleTraversee;
+    use App\Models\ModeleLiaison;
     helper(['assets']);
 
     class Client extends BaseController
@@ -66,11 +68,17 @@
         return redirect()->to('accueil');
     }
 
-    public function reserver()
+    public function reserver($noTraversee)
     {
+        $modeleLiaison = new ModeleLiaison();
         helper(['form']);
         $session = session();
 
+        $noLiaison = $session->get('noLiaisonSaisie');
+        $data['ports'] = $modeleLiaison->getPortsLiaison($noLiaison);
+        $data['date'] = $session->get('dateRetour');
+        $data['heure'] = $session->get('heure');
+        $data['traversee'] = $noTraversee;
         $data['TitreDeLaPage'] = 'Réservation';
         return view('Templates/Header', $data)
             . view('Client/vue_Reserver', $data)

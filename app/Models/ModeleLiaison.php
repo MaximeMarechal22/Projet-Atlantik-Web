@@ -33,7 +33,7 @@ class ModeleLiaison extends Model
     {
         return $this->join('port port_depart', 'liaison.noport_depart = port_depart.noport', 'inner')
         ->join('port port_arrivee', 'liaison.noport_arrivee = port_arrivee.noport',  'inner')
-        ->where('liaison.noliaison', $referenceLiaison)
+        ->where('liaison.noliaison =', $referenceLiaison)
         ->select('port_depart.nom as portDepart, port_arrivee.nom as portArrivee')
         ->get()->getResult();
     }
