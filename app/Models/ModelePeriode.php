@@ -8,7 +8,7 @@ class ModelePeriode extends Model
     protected $primaryKey = 'NOPERIODE';
     protected $useAutoIncrement = true;
     protected $returnType = 'object';
-    protected $allowedFields = ['DATEDEBUT, DATEFIN'];
+    protected $allowedFields = ['DATEDEBUT', 'DATEFIN'];
 
     public function getAllDatesSuperieuresAjd()
     {
