@@ -155,6 +155,8 @@
             } else {
                 $liaisonSaisie = $this->request->getPost('liaisons');
                 $dateSaisie = $this->request->getPost('date');
+                $session->set('noLiaisonSaisie', $liaisonSaisie);
+                $session->set('dateRetour', $dateSaisie);
                
 
                 if ($liaisonSaisie == 'Aucune laision pour le secteur choisi') {

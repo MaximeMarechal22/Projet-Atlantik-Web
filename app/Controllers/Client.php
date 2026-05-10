@@ -71,15 +71,20 @@
     public function reserver($noTraversee)
     {
         $modeleLiaison = new ModeleLiaison();
+        $modeleClient = new ModeleClient();
         helper(['form']);
         $session = session();
 
+        $session->set('heure', $this->request->getGet('heure'));
+
         $noLiaison = $session->get('noLiaisonSaisie');
-        $data['ports'] = $modeleLiaison->getPortsLiaison($noLiaison);
-        $data['date'] = $session->get('dateRetour');
-        $data['heure'] = $session->get('heure');
+        $data['ports']     = $modeleLiaison->getPortsLiaison($noLiaison);
+        $data['date']      = $session->get('dateRetour');
+        $data['heure']     = $session->get('heure');
         $data['traversee'] = $noTraversee;
+        $data['client'] = $modeleClient->find($session->get('NOCLIENT'));
         $data['TitreDeLaPage'] = 'Réservation';
+
         return view('Templates/Header', $data)
             . view('Client/vue_Reserver', $data)
             . view('Templates/Footer');

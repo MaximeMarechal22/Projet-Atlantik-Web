@@ -11,9 +11,10 @@ class ModelePeriode extends Model
     protected $allowedFields = ['DATEDEBUT', 'DATEFIN'];
 
     public function getAllDatesSuperieuresAjd()
-    {
-        return $this->select("NOPERIODE, DATEDEBUT, DATEFIN")
-            ->get()
-            ->getResult();
-    }
+{
+    return $this->select("NOPERIODE, DATEDEBUT, DATEFIN")
+        ->where("DATEDEBUT >", date('Y-m-d'))
+        ->get()
+        ->getResult();
+}
 }
