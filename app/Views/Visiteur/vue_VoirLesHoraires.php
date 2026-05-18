@@ -3,7 +3,6 @@
 <div class="container-fluid">
 
 <?php
-    use CodeIgniter\I18n\Time;
     echo "<div class='row'>
         <div class='col-2'>";
         
